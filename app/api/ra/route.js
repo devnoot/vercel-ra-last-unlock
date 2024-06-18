@@ -19,7 +19,7 @@ export async function GET(request) {
 
    const fontData = (process.env.NODE_ENV === 'development')
         ? await fs.promises.readFile(path.join(fileURLToPath(import.meta.url), '../../../../assets/kongtext.ttf'))
-        : await fetch(new URL('../../../assets/kongtext.ttf', import.meta.url)).then(res => res.arrayBuffer())
+        : await fs.promises.readFile(path.join(process.cwd(), 'assets', 'kongtext.ttf')) 
             
     const [cheevo] = await getUserRecentAchievements(authorization, { username: 'noot', recentMinutes: ONE_WEEK })
 

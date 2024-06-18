@@ -3,7 +3,6 @@ import { ImageResponse } from 'next/og'
 import { fileURLToPath } from 'url'
 import fs from 'fs'
 import path from 'path'
-import { URL } from 'url'
 
 const username = process.env.NEXT_PUBLIC_RA_API_USER
 const webApiKey = process.env.NEXT_PUBLIC_RA_API_KEY
@@ -20,7 +19,7 @@ export async function GET(request) {
 
    const fontData = (process.env.NODE_ENV === 'development')
         ? await fs.promises.readFile(path.join(fileURLToPath(import.meta.url), '../../../../assets/kongtext.ttf'))
-        : await (await fetch(new URL('../../../../assets/kongtext.ttf', import.meta.url))).arrayBuffer() 
+        : await fetch(new URL('../../../assets/kongtext.ttf', import.meta.url)).then(res => res.arrayBuffer())
             
     const [cheevo] = await getUserRecentAchievements(authorization, { username: 'noot', recentMinutes: ONE_WEEK })
 

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier \"app/**/*.{js,jsx,ts,tsx}\" --write"
   },
   "dependencies": {
     "@retroachievements/api": "^2.1.0",
@@ -15,5 +16,8 @@
     "pureimage": "^0.4.13",
     "react": "^18",
     "react-dom": "^18"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.2"
   }
 }

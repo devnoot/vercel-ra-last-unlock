@@ -16,8 +16,11 @@ const authorization = buildAuthorization({ username, webApiKey })
 export const dynamic = 'force-dynamic' // static by default, unless reading the request
 
 export async function GET(request) {
-    const fontData = await fs.promises.readFile(path.join(fileURLToPath(import.meta.url), '../../../../assets/kongtext.ttf'))
 
+   const fontData = (process.env.NODE_ENV === 'development')
+        ? await fs.promises.readFile(path.join(fileURLToPath(import.meta.url), '../../../../assets/kongtext.ttf'))
+        : await (await fetch(new URL('../../../../assets/kongtext.ttf', import.meta.url))).arrayBuffer() 
+            
     const [cheevo] = await getUserRecentAchievements(authorization, { username: 'noot', recentMinutes: ONE_WEEK })
 
     const badgeUrl = `https://retroachievements.org${cheevo.badgeUrl}`
